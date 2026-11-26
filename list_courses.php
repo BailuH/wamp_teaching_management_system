@@ -2,7 +2,10 @@
 require __DIR__ . '/includes/db.php';
 require __DIR__ . '/includes/layout.php';
 
+// trim 字符串函数 去前后空格
 $q = trim($_GET['q'] ?? '');
+
+// 这里的 `$GET`，包括其他地方出现的 `$POST` `$SERVER` 称为超全局数组，是预定义的变量，不可以更改命名
 $msg = $_GET['msg'] ?? '';
 
 $sql = 'SELECT k.kcbh, k.kcm, k.rkjs, j.xm AS teacher_name,
@@ -15,9 +18,11 @@ if ($q !== '') {
 }
 $sql .= ' GROUP BY k.kcbh, k.kcm, k.rkjs, j.xm ORDER BY k.kcbh';
 
+// `stmt` 只是一个普通变量，但是惯例命名为这个，代表预处理语句，目的是为了防止SQL注入攻击
 $stmt = $conn->prepare($sql);
 if ($q !== '') {
-    $like = '%' . $q . '%';
+    $like = '%' . $q . '%'; // % 是SQL的通配符，这里配合下文的模糊查询适用，表示只要**包含**用户查询关键词即可
+    // `sss` 代表后面三个参数都是字符串，如果是两个就写 `ss`
     $stmt->bind_param('sss', $like, $like, $like);
 }
 $stmt->execute();
@@ -53,6 +58,7 @@ render_message($msg);
     <td><?= h($row['student_count']) ?></td>
     <td><?= $row['avg_score'] === null ? '—' : h($row['avg_score']) ?></td>
     <td class="actions">
+      // urlencode url编码 将查询参数从数字变为url编码的字符串，与前面的url拼起来
       <a href="edit_course.php?kcbh=<?= urlencode($row['kcbh']) ?>">编辑</a>
       <a href="delete_course.php?kcbh=<?= urlencode($row['kcbh']) ?>">删除</a>
     </td>

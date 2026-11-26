@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/includes/db.php';
+require __DIR__ . '/includes/db.php'; // 这里是引入绝对路径
 require __DIR__ . '/includes/layout.php';
 
 $err = '';

@@ -2,6 +2,11 @@
 require __DIR__ . '/includes/db.php';
 require __DIR__ . '/includes/layout.php';
 
+/* 这里是业务逻辑，删除需要确认，所以要先判断此刻页面状态
+如果是GET，说明尚未确认，不执行DELETE语句，先查询是否有，没有则报错，有则提示
+如果是POST，说明用户是已经点过红按钮第二次到这个页面了，此时可以执行删除语句，再重定向到list */
+
+
 $xh = trim($_GET['xh'] ?? $_POST['xh'] ?? '');
 if ($xh === '') {
     render_header('删除学生', 'students');
