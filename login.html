@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智慧法大 - 登录</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        /* 整体布局 */
+        .container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* 左侧图片区 */
+        .left-panel {
+            flex: 1;
+            /* 这里使用网络图片作为占位，您可以替换为您本地的玉兰花背景图路径，例如 url('bg.jpg') */
+            background-image: url('https://images.unsplash.com/photo-1550985616-10810253b84d?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px;
+        }
+
+        /* 左上角Logo区 */
+        .logo-area {
+            display: flex;
+            align-items: center;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            color: #8c0e20;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo-text h1 {
+            font-size: 22px;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        .logo-text p {
+            font-size: 12px;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        /* 左侧底部标语 */
+        .slogan {
+            text-align: center;
+            color: #fff;
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 8px;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.6);
+            margin-bottom: 50px;
+        }
+
+        .slogan span {
+            display: block;
+            font-size: 24px;
+            margin-top: 10px;
+            letter-spacing: 6px;
+            font-weight: normal;
+        }
+
+        /* 右侧登录区 */
+        .right-panel {
+            width: 420px;
+            background-color: #fcfaf8; /* 浅米色背景 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 60px 40px;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+
+        /* 账号登录区 */
+        .login-section {
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            color: #8c0e20;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+            background: #fff;
+            border: 1px solid #d2a6a6; /* 浅红色边框 */
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            height: 50px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group:focus-within {
+            border-color: #8c0e20;
+            box-shadow: 0 0 5px rgba(140, 14, 32, 0.2);
+        }
+
+        .input-group svg {
+            width: 18px;
+            height: 18px;
+            fill: #8c0e20;
+            margin-right: 10px;
+        }
+
+        .input-group input {
+            border: none;
+            outline: none;
+            flex: 1;
+            font-size: 15px;
+            color: #333;
+            background: transparent;
+        }
+
+        .input-group input::placeholder {
+            color: #999;
+        }
+
+        .btn-submit {
+            width: 100%;
+            height: 50px;
+            background-color: #8c0e20;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            letter-spacing: 2px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #70101b;
+        }
+
+        .forgot-pwd {
+            display: block;
+            text-align: right;
+            margin-top: 10px;
+            font-size: 13px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .forgot-pwd:hover {
+            color: #8c0e20;
+        }
+
+        /* 扫码登录区 */
+        .scan-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .qrcode-box {
+            width: 100%;
+            border: 1px solid #eee;
+            background: #fff;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .wechat-header {
+            background-color: #48a34c; /* 微信绿 */
+            color: #fff;
+            text-align: center;
+            padding: 8px 0;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .qrcode-image {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .qrcode-image img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .scan-tip {
+            font-size: 12px;
+            color: #666;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        /* 隐藏滚动条 */
+        .right-panel::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 800px) {
+            .container {
+                flex-direction: column;
+            }
+            .left-panel {
+                display: none; /* 小屏幕隐藏左侧背景 */
+            }
+            .right-panel {
+                width: 100%;
+                height: 100vh;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 左侧背景区域 -->
+        <div class="left-panel">
+            <!-- 顶部Logo -->
+            <div class="logo-area">
+                <div class="logo-icon">法</div>
+                <div class="logo-text">
+                    <h1>中国政法大学 | 智慧法大</h1>
+                    <p>CHINA UNIVERSITY OF POLITICAL SCIENCE AND LAW</p>
+                </div>
+            </div>
+            
+            <!-- 底部标语 -->
+            <div class="slogan">
+                智慧校园
+                <span>智享未来</span>
+            </div>
+        </div>
+
+        <!-- 右侧登录表单区域 -->
+        <div class="right-panel">
+            
+            <!-- 账号登录 -->
+            <form class="login-section" method="post" action="login.php">
+                <div class="section-title">账号登录</div>
+                <div id="login-error" style="display:none; color:#8c0e20; background:#fbeef0; border:1px solid #d2a6a6; border-radius:4px; padding:10px; margin-bottom:15px; font-size:14px; text-align:center;"></div>
+
+                <div class="input-group">
+                    <!-- 用户图标 SVG -->
+                    <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                    <input type="text" name="username" placeholder="用户名（学号）" autocomplete="username" required>
+                </div>
+
+                <div class="input-group">
+                    <!-- 锁图标 SVG -->
+                    <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                    <input type="password" name="password" placeholder="密码" autocomplete="current-password" required>
+                </div>
+
+                <button type="submit" class="btn-submit">立即登录</button>
+                <a href="#" class="forgot-pwd">忘记密码</a>
+                <a href="admin_login.php" class="forgot-pwd" style="text-align:center; display:block; margin-top:15px;">超级管理员入口 →</a>
+            </form>
+
+            <!-- 扫码登录 -->
+            <div class="scan-section">
+                <div class="section-title">扫码登录</div>
+                
+                <div class="qrcode-box">
+                    <div class="wechat-header">
+                        <!-- 微信图标 SVG -->
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8.5,14.5c-3.5,0-6.5-2.5-6.5-5.5c0-3,3-5.5,6.5-5.5S15,6,15,9C15,12,12,14.5,8.5,14.5z M6.5,7C6.5,6.4,6.1,6,5.5,6S4.5,6.4,4.5,7S4.9,8,5.5,8S6.5,7.6,6.5,7z M11.5,7C11.5,6.4,11.1,6,10.5,6S9.5,6.4,9.5,7S9.9,8,10.5,8S11.5,7.6,11.5,7z M16.5,18.5c2.8,0,5-2,5-4.5c0-2.5-2.2-4.5-5-4.5s-5,2-5,4.5C11.5,16.5,13.7,18.5,16.5,18.5z M14.5,12.5c0-0.4,0.3-0.8,0.8-0.8s0.8,0.3,0.8,0.8s-0.3,0.8-0.8,0.8S14.5,12.9,14.5,12.5z M18,12.5c0-0.4,0.3-0.8,0.8-0.8s0.8,0.3,0.8,0.8s-0.3,0.8-0.8,0.8S18,12.9,18,12.5z"/></svg>
+                        微信扫码登录
+                    </div>
+                    <div class="qrcode-image">
+                        <!-- 二维码占位图，您可以替换为您真实的二维码图片路径 -->
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Example" alt="微信二维码">
+                    </div>
+                </div>
+                <div class="scan-tip">请使用微信扫码登录</div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+      (function(){
+        var p = new URLSearchParams(location.search);
+        if (p.get('err') === '1') {
+          var box = document.getElementById('login-error');
+          box.textContent = '用户名或密码错误，请重试。';
+          box.style.display = 'block';
+        }
+      })();
+    </script>
+</body>
+</html>

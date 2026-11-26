@@ -58,7 +58,7 @@ render_message($msg);
     <td><?= h($row['student_count']) ?></td>
     <td><?= $row['avg_score'] === null ? '—' : h($row['avg_score']) ?></td>
     <td class="actions">
-      // urlencode url编码 将查询参数从数字变为url编码的字符串，与前面的url拼起来
+      <!-- urlencode url编码 将查询参数从数字变为url编码的字符串，与前面的url拼起来 -->
       <a href="edit_course.php?kcbh=<?= urlencode($row['kcbh']) ?>">编辑</a>
       <a href="delete_course.php?kcbh=<?= urlencode($row['kcbh']) ?>">删除</a>
     </td>

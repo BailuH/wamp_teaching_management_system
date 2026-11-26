@@ -129,6 +129,31 @@ INSERT INTO `xs` VALUES ('0324101','李华',-1,'1984-02-05',1500,0),('0324103','
 UNLOCK TABLES;
 
 --
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user` (
+  `username` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '用户名，关联学生学号',
+  `password` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '密码明文（演示用）',
+  PRIMARY KEY (`username`),
+  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`username`) REFERENCES `xs` (`xh`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES ('0324101','123456'),('0324103','123456'),('0324108','123456'),('0324122','123456'),('0341130','123456'),('0341131','123456'),('0424110','123456'),('0442121','123456');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Temporary view structure for view `xs_view`
 --
 
