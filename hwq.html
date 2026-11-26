@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>学生信息录入</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+<nav class="topnav">
+  <a href="hwq.html" class="active">首页 / 录入</a>
+  <a href="list_students.php">学生管理</a>
+  <a href="list_teachers.php">教师管理</a>
+  <a href="list_courses.php">课程管理</a>
+  <a href="list_scores.php">选课成绩</a>
+  <a href="stats.php">成绩统计</a>
+</nav>
+<h2>学生信息录入</h2>
+<form class="form-card" action="add_student.php" method="post">
+  <div class="form-row">
+    <label for="xh">学号</label>
+    <input type="text" id="xh" name="xh" required>
+  </div>
+  <div class="form-row">
+    <label for="xm">姓名</label>
+    <input type="text" id="xm" name="xm" required>
+  </div>
+  <div class="form-row">
+    <label for="xb">性别</label>
+    <input type="text" id="xb" name="xb" placeholder="男 / 女">
+  </div>
+  <div class="form-row">
+    <label for="csrq">出生日期</label>
+    <input type="date" id="csrq" name="csrq">
+  </div>
+  <div class="form-row">
+    <label for="loan_price">贷款金额</label>
+    <input type="text" id="loan_price" name="loan_price" placeholder="没有则填 0">
+  </div>
+  <div class="form-actions">
+    <input type="submit" value="提交">
+    <input type="reset" value="重置">
+  </div>
+</form>
+<div class="card">
+  <h3>快捷入口</h3>
+  <p class="page-links">
+    <a href="list_students.php">查看全部学生</a>
+    <a href="list_teachers.php">查看教师</a>
+    <a href="list_courses.php">查看课程</a>
+    <a href="list_scores.php">查看选课成绩</a>
+  </p>
+</div>
+</div>
+</body>
+</html>
